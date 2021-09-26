@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model SharedInfo {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  sharedDate DateTime
+  sharedToOrFrom  String  @db.VarChar(255)
+  sharedTypeId  Int
+  messageTitle  String  @db.VarChar(255)
+  messageBody String  @db.Text
+  sharedFiles SharedFile[]
+}
+
+
+model SharedFile {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  fileName  String   @db.VarChar(255)
+  iilePath String @db.VarChar(255)
+  fileSize  Int
+  sharedInfo  SharedInfo  @relation(fields: [sharedInfoId], references: [id])
+  sharedInfoId  Int
+}

@@ -16,6 +16,8 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": "./", /* Base directory to resolve non-absolute module names. */
+    "sourceMap": true,
+    "outDir": "dist",
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx","**/*.js","**/*.jsx"],
   "exclude": ["node_modules"]
