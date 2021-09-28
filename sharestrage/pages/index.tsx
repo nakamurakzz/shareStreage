@@ -1,25 +1,48 @@
 import type { NextPage } from 'next'
 import { useState } from 'react'
 
-const HomePage: NextPage = () => {
+type Props = {
+  count:number
+}
+
+const CounterText: React.FC<Props>=(props)=>{
+  return(
+    <div>count：{props.count}</div>
+  )
+}
+
+const Counter =()=>{
   const [clickCount,setClickCount]=useState(0)
 
   const countUp = ()=>{
-    const count = clickCount + 1
-    setClickCount(count)
+    setClickCount(clickCount + 1)
   }
 
   const countDown = ()=>{
-    const count = clickCount - 1
-    setClickCount(count)
+    setClickCount(clickCount - 1)
   }
+
+  const reset = () =>{
+    setClickCount(0)
+  }
+  return(
+    <>
+      <CounterText count={clickCount}/>
+      <button onClick={countUp}>count up</button>
+      <button onClick={countDown}>count down</button>
+      <button onClick={reset}>reset</button>
+    </>
+  )
+}
+
+const HomePage: NextPage = () => {
 
   return (
     <>
       <div style={{margin:20}}>
-        <button onClick={countUp}>count up</button>
-        <button onClick={countDown}>count down</button>
-        <div>count：{clickCount}</div>
+        <Counter />
+        <Counter />
+        <Counter />
       </div>
     </>
     
